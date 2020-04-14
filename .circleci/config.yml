@@ -1,9 +1,16 @@
 version: 2.1
 
 jobs:
-    Test:
+    Test2:
         docker:
             - image: kkiesling/pymoab-visit-py2-18.04
+        steps:
+            - checkout
+            - run: pytest
+
+    Test3:
+        docker:
+            - image: kkiesling/pymoab-visit-py3-18.04
         steps:
             - checkout
             - run: pytest
@@ -11,4 +18,5 @@ jobs:
 workflows:
     build:
         jobs:
-            - Test
+            - Test2
+            - Test3
