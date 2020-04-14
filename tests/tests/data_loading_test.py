@@ -23,29 +23,29 @@ def test_py_mb_convert():
     assert file_name == "donut.stl"
 
 
-def test_plane_slice_plotting():
-    """
-    Ensure this function correctly generates three plane slice plots.
-    """
-    visit.LaunchNowin()
-    visit.RestoreSession(plane_slice_session_file, 0)
-    plane_slice_plotting(2, 2, "XY Plane", False, False)
-    plane_slice_plotting(3, 1, "XZ Plane", False, False)
-    plane_slice_plotting(4, 0, "ZY Plane", False, False)
-    visit.SetWindowLayout(4)
-    visit.SaveSession("PlaneSlice.session")
-    diff = main.diff_files("PlaneSlice.session", session_file)
-    assert len(diff) <= 105 # Accounts for bare minimum differences due to sources, hosts, etc.
-    visit.Close()
-
-
-def test_visit_config():
-    """
-    Ensure that DataLoading.py correctly produces a VisIt session file.
-    """
-    os.system("python scripts/data_loading.py %s %s -s -v" % (geom_file, mesh_file))
-    diff = main.diff_files("VisitDefaultOutput.session", session_file)
-    assert len(diff) <= 28 # Accounts for bare minimum differences due to sources, hosts, etc.
+#def test_plane_slice_plotting():
+#    """
+#    Ensure this function correctly generates three plane slice plots.
+#    """
+#    visit.LaunchNowin()
+#    visit.RestoreSession(plane_slice_session_file, 0)
+#    plane_slice_plotting(2, 2, "XY Plane", False, False)
+#    plane_slice_plotting(3, 1, "XZ Plane", False, False)
+#    plane_slice_plotting(4, 0, "ZY Plane", False, False)
+#    visit.SetWindowLayout(4)
+#    visit.SaveSession("PlaneSlice.session")
+#    diff = main.diff_files("PlaneSlice.session", session_file)
+#    assert len(diff) <= 105 # Accounts for bare minimum differences due to sources, hosts, etc.
+#    visit.Close()
+#
+#
+#def test_visit_config():
+#    """
+#    Ensure that DataLoading.py correctly produces a VisIt session file.
+#    """
+#    os.system("python scripts/data_loading.py %s %s -s -v" % (geom_file, mesh_file))
+#    diff = main.diff_files("VisitDefaultOutput.session", session_file)
+#    assert len(diff) <= 28 # Accounts for bare minimum differences due to sources, hosts, etc.
 
 
 def test_cleanup():
